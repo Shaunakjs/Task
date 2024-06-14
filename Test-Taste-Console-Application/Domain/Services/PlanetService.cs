@@ -26,7 +26,10 @@ namespace Test_Taste_Console_Application.Domain.Services
         {
             var allPlanetsWithTheirMoons = new Collection<Planet>();
 
-            var response = _httpClientService.Client
+			// Informing users about loading data
+			Logger.Instance.Info("Loading data: Fetching all planets with their moons...");
+
+			var response = _httpClientService.Client
                 .GetAsync(UriPath.GetAllPlanetsWithMoonsQueryParameters)
                 .Result;
 
@@ -65,7 +68,10 @@ namespace Test_Taste_Console_Application.Domain.Services
                 allPlanetsWithTheirMoons.Add(new Planet(planet));
             }
 
-            return allPlanetsWithTheirMoons;
+			// Informing users about the completion of data loading
+			Logger.Instance.Info("Data loaded successfully.");
+
+			return allPlanetsWithTheirMoons;
         }
 
         private static string RemoveDiacritics(string text)
